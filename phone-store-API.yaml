@@ -1,0 +1,396 @@
+openapi: 3.0.0
+info:
+  title: Phone Store API
+  description: >
+    An API for the phone store web app that enables a user to perform CRUD (create, read, update, delete) operations 
+    on the store.
+
+    🔐 No authentication required.
+    
+  version: 1.0.0
+  contact:
+    name: Oluwaseun Lawal
+    email: seunlawal030@gmail.com
+    url: https://www.phone-store-70k3.onrender.com
+
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+
+tags:
+  - name: Products
+    description: Endpoints for listing and retrieving all the products in the store
+  - name: Create Product
+    description: Endpoints for creating new products and adding them to the store
+  - name: Update Product
+    description: Endpoints for updating individual products in the store
+  - name: Delete Product
+    description: Endpoints for deleting a product from the store  
+
+paths:
+  /cars:
+  # GET Method for brand new cars
+    get:
+      tags:
+        - Cars
+      summary: Get all new cars
+      description: Returns a list of available new cars, optionally filtered by brand (using numeric ID)
+
+      parameters:
+        - in: query
+          name: brand
+          schema:
+            type: string
+          description: Filter cars by brand
+          example: Toyota
+        - in: query
+          name: id
+          schema:
+            type: number
+          description: Numeric ID used for filtering within a brand
+          example: 1
+
+      responses:
+        '200':
+          description: A JSON array of cars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Car'
+        '500':
+          description: Internal server error
+
+    # POST Method for brand new cars
+    post:
+      tags:
+        - Cars
+      summary: Add a new car
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+            example:
+              id: 1
+              year: 2025
+              brand: "Mercedes-Benz"
+              model: "GLE 350"
+              buildType: "4Matic 4dr SUV"
+              price: "73,870"
+              image: "https://www.carpix.com/sample.jpg"
+              showTag: "true"
+              tagLabel: "New listing"
+              tagIcon: "new"
+              tags: ["Bluetooth", "Navigation", "Keyless entry/start"]
+              engineType: "mild hybrid"
+              driveType: "All Wheel Drive (AWD)"
+              baseMPG: "22 MPG"
+              baseEngineSize: "2.0 L"
+              safetyFeatures: "robust"
+              infotainment: "standard options"
+              comfortFeatures: "standard options"
+              otherFeatures: "standard options"
+
+      responses:
+        '201':
+          description: Car created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error      
+
+
+  /preownedcars:
+  # GET Method for pre-owned cars
+    get:
+      tags:
+        - Pre-owned Cars
+      summary: Get all pre-owned cars
+      description: Returns a list of available pre-owned cars, optionally filtered by brand (using numeric ID)
+
+      parameters:
+        - in: query
+          name: brand
+          schema:
+            type: string
+          description: Filter pre-owned cars by brand
+          example: Toyota
+        - in: query
+          name: id
+          schema:
+            type: number
+          description: Numeric ID used for filtering within a brand
+          example: 1
+
+      responses:
+        '200':
+          description: A JSON array of pre-owned cars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreOwnedCar'
+        '500':
+          description: Internal server error                
+
+    # POST Method for pre-owned cars
+    post:
+      tags:
+        - Pre-owned Cars
+      summary: Add a pre-owned car
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOwnedCar'
+            example:
+              id: 1
+              brand: Toyota
+              model: Camry
+              price: 25000
+      responses:
+        '201':
+          description: Pre-owned Car added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOwnedCar'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+        
+
+# Not yet working at the backend
+  /users/register:
+    post:
+      tags:
+        - Users
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+            example:
+              username: johndoe
+              email: johndoe@example.com
+              password: strongPassword123
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+
+# Not yet initialized at the backend
+  /contact:
+    post:
+      tags:
+        - Contact
+      summary: Contact a seller
+
+       #   - BearerAuth: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+            example:
+              carId: car_123
+              message: Is this car still available?
+      responses:
+        '201':
+          description: Message sent successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+
+
+components:
+  schemas:
+    Car:
+      type: object
+      required:
+      - id
+      - year
+      - brand
+      - model
+      - buildType
+      - price
+      - image
+      - showTag
+      - tagLabel
+      - tagIcon
+      - tags
+      - engineType
+      - driveType
+      - baseMPG
+      - baseEngineSize
+      - safetyFeatures
+      - infotainment
+      - comfortFeatures
+      - otherFeatures
+      properties:
+        id:
+          type: string
+          description: Numeric identifier for the car (distinct from unique MongoDB _id)
+          example: 1
+        year:
+          type: number
+          example: 2025
+        brand:
+          type: string
+          example: Toyota
+        model:
+          type: string
+          example: Camry
+        buildType:
+          type: string
+          example: SE Hybrid Sedan
+        price:
+          type: number
+          example: 35920
+        image:
+          type: string
+          example: https://www.mycarimage.com/toyota-camry.png
+        showTag:
+          type: boolean
+          example: true
+        tagLabel:
+          type: string
+          example: New arrival
+        tagIcon:
+          type: string
+          example: new
+        tags: 
+          type: string
+          example: ["AWD/4WD", "Back-up camera", "Upgraded headlights", "Adaptive cruise control", "Blind spot monitoring"]
+        engineType:
+          type: string
+          example: Hybrid
+        driveType:
+          type: string
+          example: All Wheel Drive (AWD)
+        baseMPG:
+          type: string
+          example: 37 MPG
+        baseEngineSize:
+          type: string
+          example: 2.0 L
+        safetyFeatures:
+          type: string
+          example: standard
+        infotainment:
+          type: string
+          example: standard
+        comfortFeatures:
+          type: string
+          example: standard
+        otherFeatures:
+          type: string
+          example: standard
+    
+    PreownedCar:
+      type: object
+      required:
+      - id
+      - year
+      - brand
+      - model
+      - buildType
+      - price
+      - image
+      - showTag
+      - tagLabel
+      - tagIcon
+      - tags
+    
+      properties:
+        id:
+          type: string
+          description: Numeric identifier for the car (distinct from unique MongoDB _id)
+          example: 1
+        year:
+          type: number
+          example: 2025
+        brand:
+          type: string
+          example: Toyota
+        model:
+          type: string
+          example: Camry
+        buildType:
+          type: string
+          example: SE Hybrid Sedan
+        image:
+          type: string
+          example: https://www.mycarimage.com/toyota-camry.png
+        price:
+          type: number
+          example: 35920
+        mileage:
+          type: string
+          example: 58,472 miles
+        history:
+          type: string
+          example: No accident, 1 owner, personal use
+        showTag:
+          type: boolean
+          example: true
+        tagLabel:
+          type: string
+          example: New arrival
+        tagIcon:
+          type: string
+          example: new
+        tags: 
+          type: string
+          example: ["AWD/4WD", "Back-up camera", "Upgraded headlights", "Adaptive cruise control", "Blind spot monitoring"]
+             
+    # Not yet initialized at the backend
+    UserRegistration:
+      type: object
+      required:
+        - username
+        - email
+        - password
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    # Not yet initialized at the backend
+    ContactMessage:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+          example: Smith Doe
+        email:
+          type: string
+          example: smithdoe@myemail.com
+        message:
+          type: string
+          example: Is this car still available? I'm interested in getting it.
