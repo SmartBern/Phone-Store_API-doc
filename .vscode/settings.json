@@ -1,0 +1,17 @@
+{
+  // ✅ YAML schema validation for common files
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yml",
+    "https://json.schemastore.org/github-action.json": "/action.yml",
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-compose*.yml",
+     "": "*.openapi.yaml"
+  },
+
+  // ✅ Treat OpenAPI files separately
+   "yaml.validate": false,
+  "files.associations": {
+    "*.openapi.yaml": "yaml"
+  },
+
+  
+}

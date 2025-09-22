@@ -1,0 +1,166 @@
+openapi: 3.0.0
+info:
+  title: Phone Store API
+  description: >
+    An API for the phone store web app that enables a user to perform CRUD (create, read, update, delete) operations 
+    on the store.
+
+    🔐 No authentication required.
+    
+  version: 1.0.0
+  contact:
+    name: Oluwaseun Lawal
+    email: seunlawal030@gmail.com
+    url: https://www.phone-store-70k3.onrender.com
+
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+
+tags:
+  - name: Products
+    description: Endpoints for listing and retrieving all the products in the store
+  - name: Create Product
+    description: Endpoints for creating new products and adding them to the store
+  - name: Update Product
+    description: Endpoints for updating individual products in the store
+  - name: Delete Product
+    description: Endpoints for deleting a product from the store  
+
+paths:
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get all products
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+    post:
+      tags:
+        - Products
+      summary: Create a new product
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Product created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid product payload
+
+  /products/{id}:
+    get:
+      tags:
+        - Products
+      summary: Get a product by ID
+      operationId: getProductById
+      
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+          
+    put:
+      tags:
+        - Products
+      summary: Update a product by ID
+      operationId: updateProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '200':
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid update payload
+        '404':
+          description: Product not found
+
+    delete:
+      tags:
+        - Products
+      summary: Delete a product by ID
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Product deleted successfully
+        '404':
+          description: Product not found
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "12345"
+        name:
+          type: string
+          example: "Laptop"
+        price:
+          type: number
+          example: 1200
+
+    ProductInput:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        name:
+          type: string
+          example: "Smartphone"
+        price:
+          type: number
+          example: 799
+        
+             
+
