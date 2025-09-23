@@ -144,27 +144,42 @@ components:
       properties:
         id:
           type: string
-          description: MongoDB ObjectId of the car
+          description: MongoDB-provided ObjectId of the car
           example: "6890fe02ea4814c894c30a7d"
         name:
           type: string
-          example: "Laptop"
+          example: "Motorola Edge 40"
         price:
           type: number
-          example: 1200
+          example: 550
+        image: 
+          type: string
+          example: https://www.productpix.com/product.jpg
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-03-13T21:22:27.562+00:00"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2025-03-26T13:28:54.338+00:00"
 
     ProductInput:
       type: object
       required:
         - name
         - price
+        - image
       properties:
         name:
           type: string
-          example: "Smartphone"
+          example: "Samsung S23 Ultra"
         price:
           type: number
-          example: 799
+          example: "649.99"
+        image:
+         type: string
+         example: "https://images.pexels.com/photos/16149966/pexels-photo-16149966.jpeg?c…"
         
              
 
