@@ -19,13 +19,7 @@ servers:
 
 tags:
   - name: Products
-    description: Endpoints for listing and retrieving all the products in the store
-  - name: Create Product
-    description: Endpoints for creating new products and adding them to the store
-  - name: Update Product
-    description: Endpoints for updating individual products in the store
-  - name: Delete Product
-    description: Endpoints for deleting a product from the store  
+    description: Endpoints for operations related to products in the store  
 
 paths:
   /products:
@@ -182,4 +176,3 @@ components:
          example: "https://images.pexels.com/photos/16149966/pexels-photo-16149966.jpeg?c…"
         
              
-
