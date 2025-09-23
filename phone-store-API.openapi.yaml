@@ -33,7 +33,7 @@ paths:
       tags:
         - Products
       summary: Get all products
-      operationId: getAllProducts
+      operationId: getProducts
       responses:
         '200':
           description: List of products
@@ -78,6 +78,7 @@ paths:
           required: true
           schema:
             type: string
+            description: MongoDB ObjectId of the product
       responses:
         '200':
           description: Product found
@@ -99,6 +100,7 @@ paths:
           required: true
           schema:
             type: string
+            description: MongoDB ObjectId of the product
       requestBody:
         required: true
         content:
@@ -128,6 +130,7 @@ paths:
           required: true
           schema:
             type: string
+            description: MongoDB ObjectId of the product
       responses:
         '204':
           description: Product deleted successfully
@@ -141,7 +144,8 @@ components:
       properties:
         id:
           type: string
-          example: "12345"
+          description: MongoDB ObjectId of the car
+          example: "6890fe02ea4814c894c30a7d"
         name:
           type: string
           example: "Laptop"
