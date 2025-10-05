@@ -8,14 +8,17 @@ info:
     🔐 No authentication required.
     
   version: 1.0.0
+
   contact:
     name: Oluwaseun Lawal
     email: seunlawal030@gmail.com
-    url: https://www.phone-store-70k3.onrender.com
+    url: https://www.oluwaseun-lawal.vercel.com
 
 servers:
-  - url: http://localhost:5000
-    description: Local development server
+  - url: http://localhost:5000/api
+    description: Development backend server
+  - url: https://phone-store-70k3.onrender.com/api
+    description: Production backend server
 
 tags:
   - name: Products
@@ -48,7 +51,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductInput'
+              $ref: '#/components/schemas/Product'
       responses:
         '201':
           description: Product created
