@@ -33,14 +33,18 @@ paths:
       operationId: getProducts
       responses:
         '200':
-          description: List of products
+          description: List of all products with their MongoDB `_id`
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-
+              example:
+               - _id: "66d8b6b51b29b8d9404b9c9a"
+                 name: "Lenovo Legion"
+                 price: 1850
+                 image: "https://www.productpix.com/product.jpg"
     post:
       tags:
         - Products
@@ -52,6 +56,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Product'
+            example:
+              name: "Lenovo Legion"
+              price: 1850
+              image: "https://www.productpix.com/product.jpg"
+
       responses:
         '201':
           description: Product created
@@ -60,13 +69,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Product'
         '400':
-          description: Invalid product payload
+          description: Error in creating product
 
   /products/{id}:
     get:
       tags:
         - Products
-      summary: Get a product by ID
+      summary: Get a single product by `_id`
       operationId: getProductById
       
       parameters:
@@ -75,7 +84,7 @@ paths:
           required: true
           schema:
             type: string
-            description: MongoDB ObjectId of the product
+            description: MongoDB ObjectId (_id) of the product from GET /products response
       responses:
         '200':
           description: Product found
@@ -83,13 +92,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
+              example:
+                _id: "66d8b6b51b29b8d9404b9c9a"
+                name: "Lenovo Legion"
+                price: 1850
+                image: "https://www.productpix.com/product.jpg"
         '404':
           description: Product not found
           
     put:
       tags:
         - Products
-      summary: Update a product by ID
+      summary: Update a product by its MongoDB `_id`
       operationId: updateProduct
       parameters:
         - name: id
@@ -97,7 +111,8 @@ paths:
           required: true
           schema:
             type: string
-            description: MongoDB ObjectId of the product
+          description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
+            Example: `66d8b6b51b29b8d9404b9c9b`
       requestBody:
         required: true
         content:
@@ -112,14 +127,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Product'
         '400':
-          description: Invalid update payload
+          description: Invalid update execution
         '404':
           description: Product not found
 
     delete:
       tags:
         - Products
-      summary: Delete a product by ID
+      summary: Delete a product by its MongoDB `_id`
       operationId: deleteProduct
       parameters:
         - name: id
@@ -127,9 +142,10 @@ paths:
           required: true
           schema:
             type: string
-            description: MongoDB ObjectId of the product
+          description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
+            Example: `66d8b6b51b29b8d9404b9c9d`
       responses:
-        '204':
+        '200':
           description: Product deleted successfully
         '404':
           description: Product not found
@@ -139,6 +155,10 @@ components:
     Product:
       type: object
       properties:
+        _id:
+          type: string
+          description: MongoDB auto-generated ID
+          example: "66d8b6b51b29b8d9404b9c9a"
         name:
           type: string
           example: "Motorola Edge 40"
@@ -148,13 +168,4 @@ components:
         image: 
           type: string
           example: https://www.productpix.com/product.jpg
-        createdAt:
-          type: string
-          format: date-time
-          example: "2025-03-13T21:22:27.562+00:00"
-        updatedAt:
-          type: string
-          format: date-time
-          example: "2025-03-26T13:28:54.338+00:00"
         
-             
