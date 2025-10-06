@@ -103,7 +103,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductInput'
+              $ref: '#/components/schemas/Product'
       responses:
         '200':
           description: Product updated successfully
@@ -139,10 +139,6 @@ components:
     Product:
       type: object
       properties:
-        id:
-          type: string
-          description: MongoDB-provided ObjectId of the car
-          example: "6890fe02ea4814c894c30a7d"
         name:
           type: string
           example: "Motorola Edge 40"
@@ -160,22 +156,5 @@ components:
           type: string
           format: date-time
           example: "2025-03-26T13:28:54.338+00:00"
-
-    ProductInput:
-      type: object
-      required:
-        - name
-        - price
-        - image
-      properties:
-        name:
-          type: string
-          example: "Samsung S23 Ultra"
-        price:
-          type: number
-          example: "649.99"
-        image:
-         type: string
-         example: "https://images.pexels.com/photos/16149966/pexels-photo-16149966.jpeg?c…"
         
              
