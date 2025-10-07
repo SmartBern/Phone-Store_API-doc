@@ -15,7 +15,7 @@ info:
     url: https://www.oluwaseun-lawal.vercel.com
 
 servers:
-   - url: https://phone-store-70k3.onrender.com/api
+  - url: https://phone-store-70k3.onrender.com/api
     description: Production backend server
   - url: http://localhost:5000/api
     description: Development backend server
@@ -123,8 +123,8 @@ paths:
           required: true
           schema:
             type: string
-          description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
-            Example: `66d8b6b51b29b8d9404b9c9b`
+            description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
+            example: "66d8b6b51b29b8d9404b9c9b"
       requestBody:
         required: true
         content:
@@ -154,8 +154,8 @@ paths:
           required: true
           schema:
             type: string
-          description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
-            Example: `66d8b6b51b29b8d9404b9c9d`
+            description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
+            example: "66d8b6b51b29b8d9404b9c9d"
       responses:
         '200':
           description: Product deleted successfully
