@@ -15,10 +15,11 @@ info:
     url: https://www.oluwaseun-lawal.vercel.com
 
 servers:
+   - url: https://phone-store-70k3.onrender.com/api
+    description: Production backend server
   - url: http://localhost:5000/api
     description: Development backend server
-  - url: https://phone-store-70k3.onrender.com/api
-    description: Production backend server
+ 
 
 tags:
   - name: Products
@@ -47,7 +48,7 @@ paths:
                  image: "https://www.productpix.com/product.jpg"
         '500':
           description: Server error
-          
+
     post:
       tags:
         - Products
