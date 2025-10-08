@@ -52,7 +52,7 @@ paths:
     post:
       tags:
         - Products
-      summary: Create a new product
+      summary: Create (or add) a new product
       operationId: createProduct
       requestBody:
         required: true
@@ -85,7 +85,7 @@ paths:
     get:
       tags:
         - Products
-      summary: Get a single product by `_id`
+      summary: Get a single product by its MongoDB-assigned `_id`
       operationId: getSingleProduct
       
       parameters:
@@ -115,7 +115,7 @@ paths:
     put:
       tags:
         - Products
-      summary: Update a product by its MongoDB `_id`
+      summary: Update a product by its MongoDB-assigned `_id`
       operationId: updateProduct
       parameters:
         - name: id
@@ -146,7 +146,7 @@ paths:
     delete:
       tags:
         - Products
-      summary: Delete a product by its MongoDB `_id`
+      summary: Delete a product by its MongoDB-assigned `_id`
       operationId: deleteProduct
       parameters:
         - name: id
