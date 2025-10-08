@@ -86,7 +86,7 @@ paths:
       tags:
         - Products
       summary: Get a single product by `_id`
-      operationId: getProductById
+      operationId: getSingleProduct
       
       parameters:
         - in: path
@@ -94,7 +94,7 @@ paths:
           required: true
           schema:
             type: string
-            description: MongoDB ObjectId (_id) of the product from GET /products response
+            description: MongoDB ObjectId (_id) of the product, obtainable from GET /products response
       responses:
         '200':
           description: Product found
@@ -123,7 +123,7 @@ paths:
           required: true
           schema:
             type: string
-            description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
+            description: MongoDB ObjectId (_id) of the product, obtainable from GET /products response
             example: "66d8b6b51b29b8d9404b9c9b"
       requestBody:
         required: true
@@ -154,7 +154,7 @@ paths:
           required: true
           schema:
             type: string
-            description: MongoDB ObjectId of the product; the `_id` of the product obtained from **GET /products**.
+            description: MongoDB ObjectId (_id) of the product, obtainable from GET /products response
             example: "66d8b6b51b29b8d9404b9c9d"
       responses:
         '200':
