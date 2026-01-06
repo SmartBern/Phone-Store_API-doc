@@ -4,4 +4,4 @@ Phone Store is a web application that enables users to perform CRUD (Create, Rea
 
 This API documentation details several endpoints (GET, POST, PUT, DELETE) that facilitate CRUD operations on the store.
 
-This API documentation is OpenAPI-compliant and fully testable in Swagger UI.
+Phone Store API documentation is OpenAPI-compliant and fully testable in Swagger UI.
